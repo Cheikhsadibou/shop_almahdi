@@ -11,7 +11,7 @@
  Target Server Version : 80035 (8.0.35)
  File Encoding         : 65001
 
- Date: 22/01/2024 18:57:25
+ Date: 23/01/2024 14:40:47
 */
 
 SET NAMES utf8mb4;
@@ -37,12 +37,13 @@ CREATE TABLE `account_account`  (
   `is_superadmin` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `email`(`email` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of account_account
 -- ----------------------------
-INSERT INTO `account_account` VALUES (1, 'pbkdf2_sha256$720000$LrLSv8ffzfTJ2WYpUhnPlB$Wg4gaPSe9uG/tyc26aONUYXYFArfn6ybgpNDVUsV1nU=', 'Shop Almahdi', 'Service', 'Shop Almahdi Service', 'shopalmahdiservice@gmail.com', '', '2024-01-22 16:53:59.188064', '2024-01-22 16:53:59.189066', 1, 1, 1, 1);
+INSERT INTO `account_account` VALUES (1, 'pbkdf2_sha256$720000$LrLSv8ffzfTJ2WYpUhnPlB$Wg4gaPSe9uG/tyc26aONUYXYFArfn6ybgpNDVUsV1nU=', 'Shop Almahdi', 'Service', 'Shop Almahdi Service', 'shopalmahdiservice@gmail.com', '', '2024-01-22 16:53:59.188064', '2024-01-23 14:39:39.379558', 1, 1, 1, 1);
+INSERT INTO `account_account` VALUES (2, 'pbkdf2_sha256$720000$SVtqzQibh9t1lreYBoRn2p$a2TKTYmBTmrgYrIfJsPr4PwIpPfs0qDBM+FBZ084JkA=', 'Cheikh Sadibou', 'Diouf', 'cheikhdiouf035', 'cheikhdiouf035@gmail.com', '772882303', '2024-01-22 19:04:51.832288', '2024-01-23 14:08:55.913995', 0, 0, 1, 0);
 
 -- ----------------------------
 -- Table structure for account_userprofile
@@ -60,11 +61,12 @@ CREATE TABLE `account_userprofile`  (
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `user_id`(`user_id` ASC) USING BTREE,
   CONSTRAINT `account_userprofile_user_id_5afa3c7a_fk_account_account_id` FOREIGN KEY (`user_id`) REFERENCES `account_account` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of account_userprofile
 -- ----------------------------
+INSERT INTO `account_userprofile` VALUES (1, '', '', 'userprofile/default-user.png', '', '', '', 2);
 
 -- ----------------------------
 -- Table structure for admin_honeypot_loginattempt
@@ -218,12 +220,13 @@ CREATE TABLE `cart`  (
   `cart_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `date_added` date NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cart
 -- ----------------------------
 INSERT INTO `cart` VALUES (1, 'ylqxqp46dpcsdhut070zsvz9fn91um8b', '2024-01-22');
+INSERT INTO `cart` VALUES (2, 'hz3ppwstsiqvo9co5mqdt34crwpzfe0s', '2024-01-23');
 
 -- ----------------------------
 -- Table structure for carts_cartitem
@@ -243,12 +246,13 @@ CREATE TABLE `carts_cartitem`  (
   CONSTRAINT `carts_cartitem_cart_id_9cb0a756_fk_Cart_id` FOREIGN KEY (`cart_id`) REFERENCES `cart` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `carts_cartitem_product_id_acd010e4_fk_store_product_id` FOREIGN KEY (`product_id`) REFERENCES `store_product` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `carts_cartitem_user_id_4d21e0d9_fk_account_account_id` FOREIGN KEY (`user_id`) REFERENCES `account_account` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of carts_cartitem
 -- ----------------------------
 INSERT INTO `carts_cartitem` VALUES (1, 1, 1, 1, 2, NULL);
+INSERT INTO `carts_cartitem` VALUES (6, 1, 1, NULL, 33, 1);
 
 -- ----------------------------
 -- Table structure for carts_cartitem_variations
@@ -263,13 +267,15 @@ CREATE TABLE `carts_cartitem_variations`  (
   INDEX `carts_cartitem_varia_variation_id_ef9f9ee3_fk_store_var`(`variation_id` ASC) USING BTREE,
   CONSTRAINT `carts_cartitem_varia_cartitem_id_8be23372_fk_carts_car` FOREIGN KEY (`cartitem_id`) REFERENCES `carts_cartitem` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `carts_cartitem_varia_variation_id_ef9f9ee3_fk_store_var` FOREIGN KEY (`variation_id`) REFERENCES `store_variation` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 29 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of carts_cartitem_variations
 -- ----------------------------
 INSERT INTO `carts_cartitem_variations` VALUES (1, 1, 10);
 INSERT INTO `carts_cartitem_variations` VALUES (2, 1, 15);
+INSERT INTO `carts_cartitem_variations` VALUES (12, 6, 287);
+INSERT INTO `carts_cartitem_variations` VALUES (11, 6, 292);
 
 -- ----------------------------
 -- Table structure for category_category
@@ -1445,7 +1451,7 @@ CREATE TABLE `django_migrations`  (
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `applied` datetime(6) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 26 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of django_migrations
@@ -1475,6 +1481,11 @@ INSERT INTO `django_migrations` VALUES (22, 'carts', '0001_initial', '2024-01-22
 INSERT INTO `django_migrations` VALUES (23, 'orders', '0001_initial', '2024-01-22 16:49:40.865865');
 INSERT INTO `django_migrations` VALUES (24, 'sessions', '0001_initial', '2024-01-22 16:49:42.344102');
 INSERT INTO `django_migrations` VALUES (25, 'admin_honeypot', '0002_alter_loginattempt_id', '2024-01-22 16:50:44.866978');
+INSERT INTO `django_migrations` VALUES (26, 'account', '0002_alter_userprofile_user', '2024-01-22 19:54:02.765966');
+INSERT INTO `django_migrations` VALUES (27, 'account', '0003_alter_userprofile_user', '2024-01-23 09:36:09.150463');
+INSERT INTO `django_migrations` VALUES (28, 'orders', '0002_alter_order_order_number', '2024-01-23 11:11:02.310495');
+INSERT INTO `django_migrations` VALUES (29, 'orders', '0003_alter_order_order_number', '2024-01-23 14:08:02.329912');
+INSERT INTO `django_migrations` VALUES (30, 'orders', '0004_alter_order_order_number', '2024-01-23 14:14:55.192621');
 
 -- ----------------------------
 -- Table structure for django_session
@@ -1491,8 +1502,8 @@ CREATE TABLE `django_session`  (
 -- ----------------------------
 -- Records of django_session
 -- ----------------------------
-INSERT INTO `django_session` VALUES ('aflkvps2fwkhli0dt6v5nmjsypd4z7ke', 'eyJfc2Vzc2lvbl9pbml0X3RpbWVzdGFtcF8iOjE3MDU5NDk2ODkuMzcyNTg1M30:1rRzRZ:ZCRIrJ-7BmNWm-QH1sFeNeXSIINPr6peFBBSTeX_OvY', '2024-02-05 18:54:49.487611');
-INSERT INTO `django_session` VALUES ('ryjpr1u461krdmrpwdf111u7v79kt6dm', 'eyJfc2Vzc2lvbl9pbml0X3RpbWVzdGFtcF8iOjE3MDU5NDI0NzguODM4Njc4MX0:1rRxZG:7ym30eI_EZ6DTUzIbn9PleVX-zSYFO0mSFdSOUqxKI8', '2024-02-05 16:54:38.966709');
+INSERT INTO `django_session` VALUES ('ajctg3l2229ia7qnsbzsrqft0kskcr68', '.eJxVjMsOwiAUBf-FtSE8C3Tp3m8glwu1qAVT6Mr479qkm27PzJwP8S21lmvxueTue15S67C8PRm5YQMTzFhNudbWOXshHrY--62l1edIRsLJaQuAz1R2EB9Q7pViLX3Nge4KPWijtxrT63q4p4MZ2vyvw6SEYNZEBzzEQaRJgZWohEzaAQKDOKFSIqkBLDMcNQaMTEuJEawz5PsDHttG4A:1rSHwH:BzwGB8Gj_zILGxie3QsC-9QDrP0uNPPD9z6onlbju9A', '2024-02-06 14:39:45.567004');
+INSERT INTO `django_session` VALUES ('jxqr9xl6rere0jnqcwkyex1maca4x7o5', 'eyJfc2Vzc2lvbl9pbml0X3RpbWVzdGFtcF8iOjE3MDYwMTk4NjIuMjEwMzU1NX0:1rSHhP:oFvuoZPquqiMShzY5MEqOAcRRyjJe98ijc20Gdxkmwo', '2024-02-06 14:24:23.784748');
 
 -- ----------------------------
 -- Table structure for orders_order
@@ -1500,7 +1511,7 @@ INSERT INTO `django_session` VALUES ('ryjpr1u461krdmrpwdf111u7v79kt6dm', 'eyJfc2
 DROP TABLE IF EXISTS `orders_order`;
 CREATE TABLE `orders_order`  (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `order_number` int NOT NULL,
+  `order_number` int NULL DEFAULT NULL,
   `first_name` varchar(70) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `last_name` varchar(70) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `phone` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
@@ -1525,11 +1536,13 @@ CREATE TABLE `orders_order`  (
   INDEX `orders_order_user_id_e9b59eb1_fk_account_account_id`(`user_id` ASC) USING BTREE,
   CONSTRAINT `orders_order_payment_id_46928ccc_fk_orders_payment_id` FOREIGN KEY (`payment_id`) REFERENCES `orders_payment` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `orders_order_user_id_e9b59eb1_fk_account_account_id` FOREIGN KEY (`user_id`) REFERENCES `account_account` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of orders_order
 -- ----------------------------
+INSERT INTO `orders_order` VALUES (1, 2401231, 'Cheikh Sadibou', 'Diouf', '0772882303', 'cheikhdiouf035@gmail.com', 'Dakar', 'Sunugal', 'Pays-Bas', 'Alaska', 'Sénégal', '', 15075, 75, 'New', '127.0.0.1', 1, '2024-01-23 11:14:10.802051', '2024-01-23 11:15:20.147804', 2, 1);
+INSERT INTO `orders_order` VALUES (2, 2401232, 'Cheikh Sadibou', 'Diouf', '772882303', 'cheikhdiouf035@gmail.com', 'Dakar', 'Yoff', 'Afrika', 'Senegal', 'Dakar', 'ok', 50250, 250, 'New', '127.0.0.1', 1, '2024-01-23 14:18:41.483766', '2024-01-23 14:19:29.261180', 2, 2);
 
 -- ----------------------------
 -- Table structure for orders_orderproduct
@@ -1555,18 +1568,22 @@ CREATE TABLE `orders_orderproduct`  (
   CONSTRAINT `orders_orderproduct_payment_id_492ed997_fk_orders_payment_id` FOREIGN KEY (`payment_id`) REFERENCES `orders_payment` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `orders_orderproduct_product_id_4d6ac024_fk_store_product_id` FOREIGN KEY (`product_id`) REFERENCES `store_product` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `orders_orderproduct_user_id_1e7a7ab7_fk_account_account_id` FOREIGN KEY (`user_id`) REFERENCES `account_account` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of orders_orderproduct
 -- ----------------------------
+INSERT INTO `orders_orderproduct` VALUES (1, 1, 15000, 1, '2024-01-23 11:15:20.407829', '2024-01-23 11:15:20.812928', 1, 36, 2, 1);
+INSERT INTO `orders_orderproduct` VALUES (2, 1, 30000, 1, '2024-01-23 14:19:29.362176', '2024-01-23 14:19:30.301412', 2, 6, 2, 2);
+INSERT INTO `orders_orderproduct` VALUES (3, 1, 5000, 1, '2024-01-23 14:19:30.775113', '2024-01-23 14:19:31.205932', 2, 48, 2, 2);
+INSERT INTO `orders_orderproduct` VALUES (4, 1, 15000, 1, '2024-01-23 14:19:31.686884', '2024-01-23 14:19:31.852771', 2, 36, 2, 2);
 
 -- ----------------------------
 -- Table structure for orders_orderproduct_variations
 -- ----------------------------
 DROP TABLE IF EXISTS `orders_orderproduct_variations`;
 CREATE TABLE `orders_orderproduct_variations`  (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `orderproduct_id` bigint NOT NULL,
   `variation_id` bigint NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
@@ -1574,11 +1591,19 @@ CREATE TABLE `orders_orderproduct_variations`  (
   INDEX `orders_orderproduct__variation_id_5dfd0e51_fk_store_var`(`variation_id` ASC) USING BTREE,
   CONSTRAINT `orders_orderproduct__orderproduct_id_0f116a3b_fk_orders_or` FOREIGN KEY (`orderproduct_id`) REFERENCES `orders_orderproduct` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `orders_orderproduct__variation_id_5dfd0e51_fk_store_var` FOREIGN KEY (`variation_id`) REFERENCES `store_variation` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 57 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of orders_orderproduct_variations
 -- ----------------------------
+INSERT INTO `orders_orderproduct_variations` VALUES (49, 1, 315);
+INSERT INTO `orders_orderproduct_variations` VALUES (50, 1, 318);
+INSERT INTO `orders_orderproduct_variations` VALUES (52, 2, 47);
+INSERT INTO `orders_orderproduct_variations` VALUES (51, 2, 50);
+INSERT INTO `orders_orderproduct_variations` VALUES (54, 3, 420);
+INSERT INTO `orders_orderproduct_variations` VALUES (53, 3, 424);
+INSERT INTO `orders_orderproduct_variations` VALUES (55, 4, 315);
+INSERT INTO `orders_orderproduct_variations` VALUES (56, 4, 318);
 
 -- ----------------------------
 -- Table structure for orders_payment
@@ -1595,11 +1620,13 @@ CREATE TABLE `orders_payment`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `orders_payment_user_id_cfa9f321_fk_account_account_id`(`user_id` ASC) USING BTREE,
   CONSTRAINT `orders_payment_user_id_cfa9f321_fk_account_account_id` FOREIGN KEY (`user_id`) REFERENCES `account_account` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of orders_payment
 -- ----------------------------
+INSERT INTO `orders_payment` VALUES (1, '8A690515E6875184C', 'PayPal', '15075.0', 'COMPLETED', '2024-01-23 11:15:20.022825', 2);
+INSERT INTO `orders_payment` VALUES (2, '6A7256605G281264M', 'PayPal', '50250.0', 'COMPLETED', '2024-01-23 14:19:29.159125', 2);
 
 -- ----------------------------
 -- Table structure for store_product
@@ -1632,7 +1659,7 @@ INSERT INTO `store_product` VALUES (2, 'Chaussure haute de gamme', 'chaussure-ha
 INSERT INTO `store_product` VALUES (3, 'Chaussures pour un mariage', 'chaussures-pour-un-mariage', 'Chaussures pour un mariage Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. Shoes Class', 5000, 'photo/produts/chaussures_hommes.jpg', 97, 1, '2023-12-18 19:27:20.545454', '2024-01-13', 1);
 INSERT INTO `store_product` VALUES (4, 'chaussures hommes haut de gamme', 'chaussures-hommes-haut-de-gamme', 'chaussures hommes haut de gamme Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. Shoes class', 25000, 'photo/produts/Capture_class.png', 100, 1, '2023-12-18 19:29:13.116728', '2024-01-13', 1);
 INSERT INTO `store_product` VALUES (5, 'Chaussure de running Marine', 'chaussure-de-running-marine', 'Chaussure de running Marine Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. Shoes Basquet', 12000, 'photo/produts/Chaussure_de_running.jpg', 100, 1, '2023-12-18 19:30:51.130267', '2024-01-13', 5);
-INSERT INTO `store_product` VALUES (6, 'BOOTS SANTONI CARTER', 'boots-santoni-carter', 'BOOTS SANTONI CARTER Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. Shoes Class', 30000, 'photo/produts/santonileather.jpg', 92, 1, '2023-12-18 19:32:29.630822', '2024-01-12', 1);
+INSERT INTO `store_product` VALUES (6, 'BOOTS SANTONI CARTER', 'boots-santoni-carter', 'BOOTS SANTONI CARTER Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. Shoes Class', 30000, 'photo/produts/santonileather.jpg', 91, 1, '2023-12-18 19:32:29.630822', '2024-01-23', 1);
 INSERT INTO `store_product` VALUES (7, 'Chaussures adidas', 'chaussures-adidas', 'Chaussures adidas Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. Shoes Basquet', 13000, 'photo/produts/ChaussuresMarine.jpg', 100, 1, '2023-12-18 19:36:38.711954', '2024-01-13', 5);
 INSERT INTO `store_product` VALUES (8, 'Sandales cuir homme artisanales', 'sandales-cuir-homme-artisanales', 'Sandales cuir homme artisanales Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. Sandale cuir', 100, 'photo/produts/Artisanat_Maroc.jpg', 100, 1, '2023-12-18 19:37:55.099588', '2024-01-13', 6);
 INSERT INTO `store_product` VALUES (9, 'Mode homme sandale en cuir', 'mode-homme-sandale-en-cuir', 'Mode homme sandale en cuir Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. Sandale cuir', 100, 'photo/produts/ArtisanatS1.jpg', 100, 1, '2023-12-18 19:39:29.041544', '2024-01-13', 6);
@@ -1662,7 +1689,7 @@ INSERT INTO `store_product` VALUES (32, 'HUAWEI Watch 3 GT', 'huawei-watch-3-gt'
 INSERT INTO `store_product` VALUES (33, 'PERPETUAL STAINLESS STEEL', 'perpetual-stainless-steel', 'PERPETUAL STAINLESS STEEL Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen montre', 20000, 'photo/produts/Capture_d_montre.png', 100, 1, '2023-12-19 11:04:58.929771', '2024-01-15', 7);
 INSERT INTO `store_product` VALUES (34, 'Circle Smart Watch', 'circle-smart-watch', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book Circle Smart Watch Montre', 20000, 'photo/produts/Capturmontre.png', 100, 1, '2023-12-19 11:07:14.109992', '2024-01-15', 7);
 INSERT INTO `store_product` VALUES (35, 'Buy HUAWEI WATCH GT 3', 'buy-huawei-watch-gt-3', 'Buy HUAWEI WATCH GT 3 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book Montre', 15000, 'photo/produts/Capture2023montre.png', 80, 1, '2023-12-19 11:08:52.118360', '2024-01-15', 7);
-INSERT INTO `store_product` VALUES (36, 'Apple Watch Series 9', 'apple-watch-series-9', 'Apple Watch Series 9 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book  Apple Watch Series 9 Montre', 15000, 'photo/produts/e0ef9c.jpg', 99, 1, '2023-12-19 11:10:03.292898', '2024-01-15', 7);
+INSERT INTO `store_product` VALUES (36, 'Apple Watch Series 9', 'apple-watch-series-9', 'Apple Watch Series 9 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book  Apple Watch Series 9 Montre', 15000, 'photo/produts/e0ef9c.jpg', 97, 1, '2023-12-19 11:10:03.292898', '2024-01-23', 7);
 INSERT INTO `store_product` VALUES (37, 'Watch - Apple', 'watch-apple', 'Apple Watch Series 9 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book  Apple Watch Series 9 Montre', 25000, 'photo/produts/WATCH1.jpg', 100, 1, '2023-12-19 11:11:47.073484', '2024-01-15', 7);
 INSERT INTO `store_product` VALUES (38, 'Apple Watch Ultra 2', 'apple-watch-ultra-2', 'Apple Watch Series 9 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book  Apple Watch Series 9 Montre', 35000, 'photo/produts/watchcard.jpg', 48, 1, '2023-12-19 11:13:09.459603', '2024-01-15', 7);
 INSERT INTO `store_product` VALUES (39, 'Lacoste', 'lacoste', 'lacoste-noir-et-blanc Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book lacoste noir et blanc', 3000, 'photo/produts/captureL1.jpg', 80, 1, '2023-12-19 11:16:57.672095', '2024-01-15', 7);
@@ -1674,7 +1701,7 @@ INSERT INTO `store_product` VALUES (44, 'Chemises Solid Manches', 'chemises-soli
 INSERT INTO `store_product` VALUES (45, 'Lacoste Cotton', 'lacoste-cotton', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book Lacoste Solid Manches', 4000, 'photo/produts/CaptureL2_fGciOXW.jpg', 100, 1, '2023-12-19 11:31:09.373227', '2024-01-15', 10);
 INSERT INTO `store_product` VALUES (46, 'LACOSTE  Bleu', 'lacoste-bleu', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book Lacoste Solid Manches', 4000, 'photo/produts/LACOSTEmarine.jpg', 50, 1, '2023-12-19 11:32:32.490423', '2024-01-15', 10);
 INSERT INTO `store_product` VALUES (47, 'lacoste vert olive', 'lacoste-vert-olive', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book Lacoste Solid Manches', 5000, 'photo/produts/LacostePolo.jpg', 80, 1, '2023-12-19 11:34:12.333848', '2024-01-16', 10);
-INSERT INTO `store_product` VALUES (48, 'Chemise Homme blue', 'chemise-homme-blue', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book Chemise Homme blue', 5000, 'photo/produts/Capturech.png', 98, 1, '2023-12-19 11:36:13.319966', '2024-01-16', 8);
+INSERT INTO `store_product` VALUES (48, 'Chemise Homme blue', 'chemise-homme-blue', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book Chemise Homme blue', 5000, 'photo/produts/Capturech.png', 97, 1, '2023-12-19 11:36:13.319966', '2024-01-23', 8);
 INSERT INTO `store_product` VALUES (49, 'Chemise Homme pret à port', 'chemise-homme-pret-a-port', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book Chemise Homme rouge', 3500, 'photo/produts/Captureplus.png', 100, 1, '2023-12-19 11:43:01.381331', '2024-01-16', 8);
 INSERT INTO `store_product` VALUES (50, 'Chemise Homme', 'chemise-homme', 'Chemise Homme Chemise Homme noir Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book Chemise Homme noir', 4000, 'photo/produts/Chemisesimple.png', 76, 1, '2023-12-19 11:44:34.000630', '2024-01-16', 8);
 INSERT INTO `store_product` VALUES (51, 'Chemise classe', 'chemise-classe', 'Chemise classe Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book Chemise classe', 4500, 'photo/produts/CaptureC3.jpg', 100, 1, '2023-12-19 11:46:16.472091', '2024-01-16', 8);
