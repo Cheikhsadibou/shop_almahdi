@@ -107,7 +107,7 @@ DATABASES = {
         'NAME': 'myshopdb',
         'HOST':'127.0.0.1', 
         'USER': 'root', 
-        'PASSWORD':'diamalaye1994', 
+        'PASSWORD':'cheikhsadibou1994', 
         'PORT':'3306',  
     } 
 }
